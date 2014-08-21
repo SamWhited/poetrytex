@@ -842,10 +842,15 @@
 %
 % \begin{macro}{\incipit}
 % \changes{2.0.0}{2013/03/06}{Allow the user to declare an incipit}
+% \begin{macro}{\silentincipit}
+% \changes{2.2.0}{2014/08/21}{Add non-printing incipit command}
 % An incipit can be declared within the poem environment using the
 % \code{\textbackslash incipit} command. This will reprint the first argument so
 % you don't have to write your first line twice. This is useful for untitled
 % poems as you can put their incipit in the ToP in place of a default title.
+% \code{\textbackslash silentincipit} will declare an incipit but will not
+% reprint its argument, for cases where the form you want in the ToP differs
+% from the actual first line.
 %    \begin{macrocode}
 \newcommand*{\incipit}[1]{%
   \global\expandafter\def%
@@ -854,7 +859,14 @@
     \endcsname{##1}%
   ##1%
 }
+\newcommand*{\silentincipit}[1]{%
+  \global\expandafter\def%
+    \csname%
+      @poem\arabic{absolutepoemnum} incipit%
+    \endcsname{##1}%
+}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 
 % \begin{macro}{\theincipit}
